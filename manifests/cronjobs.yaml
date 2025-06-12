@@ -1,0 +1,50 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: octopus-finetune
+  namespace: backpack
+spec:
+  schedule: "0 2 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: octopus
+              image: backpack/octopus:latest
+              command: ["/bin/sh", "-c", "echo finetune"]
+          restartPolicy: OnFailure
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: ctr-fetch
+  namespace: backpack
+spec:
+  schedule: "0 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: fetch
+              image: curlimages/curl
+              command: ["/bin/sh", "-c", "echo fetch CTR"]
+          restartPolicy: OnFailure
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: nemesis-chaos
+  namespace: backpack
+spec:
+  schedule: "0 3 * * 0"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: chaos
+              image: backpack/nemesis:latest
+              command: ["/bin/sh", "-c", "echo chaos"]
+          restartPolicy: OnFailure

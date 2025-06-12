@@ -1,0 +1,9 @@
+replicaCount: 1
+image:
+  repository: backpack/api
+  tag: latest
+service:
+  type: ClusterIP
+  port: 8080
+persistence:
+  enabled: false

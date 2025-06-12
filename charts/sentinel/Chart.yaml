@@ -1,0 +1,4 @@
+apiVersion: v2
+name: sentinel
+version: 0.1.0
+description: Sentinel agent deployment

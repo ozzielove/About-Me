@@ -1,0 +1,52 @@
+repositories:
+  - name: prometheus-community
+    url: https://prometheus-community.github.io/helm-charts
+  - name: traefik
+    url: https://helm.traefik.io/traefik
+  - name: postgres-operator
+    url: https://opensource.zalando.com/postgres-operator/charts/postgres-operator
+  - name: n8n
+    url: https://n8n-io.github.io/n8n-helm-chart
+
+releases:
+  - name: postgres-operator
+    namespace: backpack
+    chart: postgres-operator/postgres-operator
+    values:
+      - values/postgres-operator.yaml
+
+  - name: n8n
+    namespace: backpack
+    chart: n8n/n8n
+    values:
+      - values/n8n.yaml
+
+  - name: traefik
+    namespace: backpack
+    chart: traefik/traefik
+    values:
+      - values/traefik.yaml
+
+  - name: kube-prometheus-stack
+    namespace: backpack
+    chart: prometheus-community/kube-prometheus-stack
+    values:
+      - values/kube-prometheus-stack.yaml
+
+  - name: backpack-api
+    namespace: backpack
+    chart: ./charts/backpack-api
+    values:
+      - charts/backpack-api/values.yaml
+
+  - name: sentinel
+    namespace: backpack
+    chart: ./charts/sentinel
+    values:
+      - charts/sentinel/values.yaml
+
+  - name: ollama
+    namespace: backpack
+    chart: ./charts/ollama
+    values:
+      - charts/ollama/values.yaml
