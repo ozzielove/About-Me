@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: backpack-api
+spec:
+  type: {{ .Values.service.type }}
+  selector:
+    app: backpack-api
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: 8080

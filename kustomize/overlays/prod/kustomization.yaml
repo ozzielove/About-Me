@@ -1,0 +1,10 @@
+resources:
+  - ../../manifests/cronjobs.yaml
+  - ../../manifests/ingress.yaml
+patchesStrategicMerge:
+  - ollama-gpu-patch.yaml
+configMapGenerator:
+  - name: api-keys
+    literals:
+      - PICTORY_API_KEY=REPLACE_ME
+      - YT_API_KEY=REPLACE_ME
